@@ -26,3 +26,4 @@ def deploy():
         run('DJANGO_SETTINGS_MODULE=production python manage.py syncdb --noinput')
         run('DJANGO_SETTINGS_MODULE=production python manage.py migrate')
         run('supervisorctl reload')
+        run('supervisord')

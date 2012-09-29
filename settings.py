@@ -157,3 +157,11 @@ THUMBNAIL_DUMMY = True
 THUMBNAIL_DUMMY_SOURCE = 'http://placehold.it/%(width)sx%(height)s'
 
 from secrets import *
+
+
+CELEB_LIST = [
+    "kimkardashian": {
+        "twitter": "KimKardashian",
+        "facebook": "KimKardashian"
+    }
+]

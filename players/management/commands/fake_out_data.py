@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
 
 def fake_brand(player):
-    
+    pass
     
 def fake_player(player):
     pass

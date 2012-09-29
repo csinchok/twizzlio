@@ -16,6 +16,7 @@ var
 lib
 include
 develop-eggs
+src
 
 # Installer logs
 pip-log.txt

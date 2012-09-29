@@ -11,7 +11,4 @@
   	> pip install -r requirements.txt
 	> python manage.py syncdb
 	> python manage.py migrate
-	
-Add to your /etc/hosts:
-    
-	66.175.213.211 twizzl.io	
+    > python manage.py runserver

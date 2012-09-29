@@ -13,13 +13,16 @@
 
 	<title>{% block title %}{% endblock %}Twizzl.io</title>
 
+
 	{% compress css %}
-	<!-- CSS GOES HERE -->
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
 	{% endcompress %}
 	
 	{% compress js %}
 	<!-- JS GOES HERE -->
 	{% endcompress %}
+	<script type="text/javascript" src="//use.typekit.net/hmo3cvn.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
 </head>
 <body>

@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Twizzlio Home{% endblock %}
+
+{% block content %}
+
+
+
+
+<!-- Example row of columns -->
+<div class="row">
+  <div class="span6">
+    
+    <h2 class="teamname">Your Team</h2>
+
+    <table id="yourteam" class="table table-striped slot-group facebook-results" data-type="facebook">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Facebook User</th>
+          <th>Likes</th>
+          <th>Commented</th>  
+          <th>New friends</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="slot" data-id="1234">
+          <td><button type="button" class="close remove">&times;</button></td>
+          <td>
+            <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/275695_768467844_144667747_q.jpg">
+            Rob C.
+          </td>
+          <td>10</td>
+          <td>20</td>
+          <td>10</td>          
+          <td class="total">200</td>
+        </tr>
+        <tr class="slot" data-id="1234">
+          <td colspan="6" class="table-no-data">
+            <a class="add" href="#">Empty slot. Click to fill</a>
+          </td>
+        </tr> 
+      </tbody>
+    </table>
+
+    <table class="table table-striped slot-group twitter-results" data-type="twitter">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Twitter User</th>
+          <th>RTs</th>
+          <th>New followers</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="slot" data-twitter-id="1234">
+          <td><button type="button" class="close remove">&times;</button></td>
+          <td>
+            <img src="https://twimg0-a.akamaihd.net/profile_images/2610763144/1f8850kb8il0hajhxhoo_normal.jpeg">
+            @johncraig
+          </td>
+          <td>10</td>
+          <td>20</td>
+          <td class="total">200</td>
+        </tr>
+        <tr  class="slot" data-id="1234">
+          <td colspan="5" class="table-no-data">
+            <a class="add" href="#">Empty slot. Click to fill</a>
+          </td>
+        </tr>       
+      </tbody>
+    </table>
+    
+    
+
+    <table class="table table-striped slot-group celeb-results" data-type="celeb">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Sexy Celeb</th>
+          <th>FB Pts</th>
+          <th>Twitter Pts</th>  
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="slot" data-celeb-id="1234">
+          <td><button type="button" class="close remove">&times;</button></td>
+          <td>
+            <img src="https://twimg0-a.akamaihd.net/profile_images/2385531870/ffb6obdzkxc3pk7lvbw2_reasonably_small.jpeg">
+            Justin Bieber
+          </td>
+          <td>10</td>
+          <td>10</td>          
+          <td class="total">200</td>
+        </tr>
+        <tr  class="slot" data-id="1234">
+          <td colspan="5">
+            <a href="#">Empty slot. Click to fill</a>
+          </td>
+        </tr>         
+      </tbody>
+    </table>
+
+
+    <table class="table table-striped slot-group brand-results" data-type="brand">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Kewl Brand</th>
+          <th>FB Pts</th>
+          <th>Twitter Pts</th>  
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="slot" data-id="1234">
+          <td><button type="button" class="close remove">&times;</button></td>
+          <td>
+            <img src="https://twimg0-a.akamaihd.net/profile_images/2646120075/6f47612a4041e851a02f1e2c06d607fc_bigger.jpeg">
+            Tide
+          </td>
+          <td>10</td>
+          <td>10</td>          
+          <td class="total">200</td>
+        </tr>
+        <tr class="slot" data-id="1234">
+          <td><button type="button" class="close remove">&times;</button></td>
+          <td>
+            <img src="https://twimg0-a.akamaihd.net/profile_images/2257169447/profile_reasonably_small.jpeg">
+            Stride
+          </td>
+          <td>10</td>
+          <td>10</td>          
+          <td class="total">200</td>
+        </tr>
+        <tr class="slot" data-id="">
+          <td colspan="5" class="table-no-data">
+            <a href="#">Empty slot. Click to fill</a>
+          </td>
+        </tr>      
+      </tbody>
+    </table>
+    <div class="team-total">Total Points: 100</div>
+  </div>
+  <div class="span6">
+    <h2 class="teamname">Friend's Team</h2>
+  </div>
+  
+</div>
+
+
+
+<!-- remove alert -->
+
+<div id="remove-alert" style="display:none">
+  <div class="alert alert-block alert-info fade in">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading">Are you sure you want to remove <span id="remove-username"></span></h4>
+    <p>
+      <a class="btn btn-danger" href="#">Remove</a> <a class="btn" href="#">Cancel</a>
+    </p>
+  </div>
+</div>
+
+<!-- Add modal -->
+
+
+
+
+
+<script type="text/javascript">
+  roster_ui.init();
+</script>
+
+{% endblock %}

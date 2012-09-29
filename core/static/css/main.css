@@ -1,0 +1,46 @@
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.logo {
+	font-family: 'bello-pro';
+}
+
+.typekit-badge {
+	display:none !important;
+}
+
+.hero-unit {
+	text-align:center;
+}
+
+table td.table-no-data {
+	text-align:center;
+	font-style: italic;
+}
+
+.score {
+	color: blue;
+	font-weight:bold;
+}
+.score.opp {
+	color: red;
+}
+
+
+/* head to head page */
+table.slot-group tbody img {height:24px}
+table.slot-group tbody td {
+	line-height: 24px;
+}
+
+.slot-group td.total {
+	font-weight: bold;
+}
+
+.team-total {
+	display:block;
+	font-size:18px;
+	margin-bottom:6px;
+}

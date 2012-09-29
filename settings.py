@@ -151,6 +151,7 @@ LOGGING = {
 import djcelery
 djcelery.setup_loader()
 CELERY_ALWAYS_EAGER = True
+BROKER_URL = 'amqp://guest:guest@localhost:5672/twizzlio'
 TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
 
 THUMBNAIL_DUMMY = True

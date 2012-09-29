@@ -1,5 +1,8 @@
 *.py[cod]
 
+# Bullshit 
+*.DS_Store
+
 # C extensions
 *.so
 *.db

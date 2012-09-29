@@ -122,7 +122,8 @@ INSTALLED_APPS = (
     'compressor',
     'djcelery',
     
-    'twizzlio.core'
+    'twizzlio.core',
+    'twizzlio.players'
 )
 
 # A sample logging configuration. The only tangible logging

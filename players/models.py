@@ -13,7 +13,7 @@ twitter_proxy = "https://api.singly.com/proxy/twitter/"
 
 class Player(models.Model):
     name = models.CharField(max_length=255)
-    photo = models.URLField(null=True)
+    photo = models.ImageField(upload_to='player', null=True, blank=True)
     
     user = models.ForeignKey(User, null=True)
     
@@ -60,75 +60,6 @@ class BrandPlayer(Player):
             twitter_score = 0
             
         return facebook_score + twitter_score
-            
-        
-        
-    
-    def import_facebook(self):
-        if self.facebook_name is None:
-            return
-            
-        r = requests.get("%s%s?access_token=%s" % (fb_proxy, self.facebook_name, settings.SINGLY_ACCESS_TOKEN))
-        
-        if r.json.has_key('likes'):
-            likes = r.json['likes']
-        else:
-            likes = 0
-        
-        if r.json.has_key('talking_about_count'):
-            talking_about = r.json['talking_about_count']
-        else:
-            talking_about = 0
-        
-        if self.photo is None:
-            try:
-                url = "%s%s/picture?type=large&access_token=%s" % (fb_proxy, self.facebook_name, settings.SINGLY_ACCESS_TOKEN)
-                self.photo = url
-                self.save()
-            except:
-                pass
-        
-        r = requests.get("%s/%s/posts?limit=100&since=yesterday&access_token=%s" % (fb_proxy, self.facebook_name, settings.SINGLY_ACCESS_TOKEN))
-        
-        if r.json.has_key('data'):
-            posts = len(r.json['data'])
-        else: 
-            pass
-        
-        today = datetime.date.today() - datetime.timedelta(days=1)
-
-        fb_data, created = BrandFacebookData.objects.get_or_create(date=today, player=self)
-        fb_data.likes = likes
-        fb_data.talking_about = talking_about
-        fb_data.posts = posts
-        fb_data.save()
-        
-        
-    def import_twitter(self):
-        if self.twitter_handle is None:
-            return
-            
-        r = requests.get("%susers/show.json?screen_name=%s&access_token=%s" % (twitter_proxy, self.twitter_handle, settings.SINGLY_ACCESS_TOKEN))
-        
-        if r.json.has_key('followers_count'):
-            followers = r.json['followers_count']
-        else:
-            followers = 0
-            
-        if r.json.has_key('statuses_count'):
-            statuses = r.json['statuses_count']
-        else:
-            statuses = 0
-        
-        # r = requests.get("%sstatuses/user_timeline.json?count=200&screen_name=%s&access_token=%s" % (twitter_proxy, self.twitter_handle, settings.SINGLY_ACCESS_TOKEN))
-        
-        today = datetime.date.today() - datetime.timedelta(days=1)
-        
-        twitter_data, created = BrandTwitterData.objects.get_or_create(date=today, player=self)
-            
-        twitter_data.statuses = statuses
-        twitter_data.followers = followers
-        twitter_data.save()
             
     def str(self):
         return self.name

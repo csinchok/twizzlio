@@ -29,12 +29,12 @@ class Player(models.Model):
             return 0   
             
             
-    def import_facebook(self):
+    def import_facebook(self, date=datetime.date.today()):
         access_token = self.user.singly.access_token
         
         r = requests.get("%sme/friends?access_token=%s" % (fb_proxy, access_token))
         
-        friends = r.json.get('data', 0)
+        friends = len(r.json.get('data', []))
             
         if self.photo is None:
             try:
@@ -43,14 +43,12 @@ class Player(models.Model):
                 self.save()
             except:
                 pass
-            
-        today = datetime.date.today()
-            
-        fb, created = FacebookData.objects.get_or_create(player=self, date=today)
+                        
+        fb, created = FacebookData.objects.get_or_create(player=self, date=date)
         fb.friends = friends
         fb.save()
     
-    def import_twitter(self):
+    def import_twitter(self, date=datetime.date.today()):
         access_token = self.user.singly.access_token
         
         r = requests.get("%sprofiles/twitter?access_token=%s" % (singly_url, access_token))
@@ -63,7 +61,7 @@ class Player(models.Model):
         followers = data.get('followers_count', 0)
         statuses = data.get('statuses_count', 0)
             
-        twitter, created = TwitterData.objects.get_or_create(player=self, date=today)
+        twitter, created = TwitterData.objects.get_or_create(player=self, date=date)
         twitter.followers = followers
         twitter.statuses = statuses
         twitter.save()

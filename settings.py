@@ -107,7 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'twizzlio.urls'
+ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'twizzlio.wsgi.application'
@@ -134,8 +134,8 @@ INSTALLED_APPS = (
     'djcelery',
     'singly',
     
-    'twizzlio.core',
-    'twizzlio.players'
+    'core',
+    'players'
 )
 
 # A sample logging configuration. The only tangible logging

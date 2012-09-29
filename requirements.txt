@@ -6,6 +6,7 @@ anyjson==0.3.3
 billiard==2.7.3.17
 celery==3.0.11
 django-appconf==0.5
+django-celery==3.0.10
 django-compressor==1.2
 gunicorn==0.14.6
 kombu==2.4.7

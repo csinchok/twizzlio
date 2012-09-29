@@ -1,7 +1,10 @@
 Django==1.4.1
+Fabric==1.4.3
 South==0.7.6
 django-appconf==0.5
 django-compressor==1.2
+pycrypto==2.6
 requests==0.14.0
 requests-oauth==0.4.1
+ssh==1.7.14
 wsgiref==0.1.2

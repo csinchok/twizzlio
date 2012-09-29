@@ -85,7 +85,18 @@ SECRET_KEY = '-!sy#uiqn3vyk5@&me5*o^w3k_2olqvkrm&2gedx38m6u6r*v^'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request"
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,7 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'twizzlio.urls'
+ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'twizzlio.wsgi.application'
@@ -106,6 +117,8 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
+CELERY_IGNORE_RESULT = True
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -121,8 +134,10 @@ INSTALLED_APPS = (
     'south',
     'compressor',
     'djcelery',
+    'singly',
     
-    'twizzlio.core'
+    'core',
+    'players'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -151,9 +166,15 @@ LOGGING = {
 import djcelery
 djcelery.setup_loader()
 CELERY_ALWAYS_EAGER = True
+BROKER_URL = 'amqp://guest:guest@localhost:5672/twizzlio'
 TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
 
 THUMBNAIL_DUMMY = True
 THUMBNAIL_DUMMY_SOURCE = 'http://placehold.it/%(width)sx%(height)s'
 
 from secrets import *
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'singly.backends.SinglyBackend',
+)

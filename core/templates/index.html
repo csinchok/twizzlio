@@ -1,16 +1,22 @@
 {% extends "base.html" %}
+{% load singly %}
 
 {% block title %}Twizzlio{% endblock %}
 
 {% block content %}
-
-
 
 <div class="hero-unit">
   <span>Welcome to</span>
   <h1 class="logo">Twizzlio</h1>
   <div>Gamifying Social Influence</div>
   <button class="btn">Sign in</button>
+  
+  {% if user.is_authenticated %}
+  Welcome, {{ user.username }}
+  {% else %}
+  <a href="{% singly_login_url 'facebook' %}">Login With Facebook</a>
+  <a href="{% singly_login_url 'twitter' %}">Login With Twitter</a>
+  {% endif %}
 </div>
 
 {% endblock %}

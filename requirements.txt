@@ -19,5 +19,6 @@ requests==0.14.0
 requests-oauth==0.4.1
 ssh==1.7.14
 superlance==0.7
-supervisor==3.0b1
+supervisor==3.0a10
 wsgiref==0.1.2
+-e git+https://github.com/csinchok/django-singly.git@8ce2f1bc74787fd364e59f7beaf883fad74c98bc#egg=singly

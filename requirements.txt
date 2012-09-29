@@ -1,5 +1,6 @@
 Django==1.4.1
 Fabric==1.4.3
+Pillow==1.7.7
 South==0.7.6
 amqplib==1.0.2
 anyjson==0.3.3
@@ -18,6 +19,7 @@ python-dateutil==1.5
 requests==0.14.0
 requests-oauth==0.4.1
 ssh==1.7.14
+sorl-thumbnail==11.12
 superlance==0.7
 supervisor==3.0a10
 wsgiref==0.1.2

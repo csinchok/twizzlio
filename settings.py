@@ -85,7 +85,18 @@ SECRET_KEY = '-!sy#uiqn3vyk5@&me5*o^w3k_2olqvkrm&2gedx38m6u6r*v^'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request"
 )
 
 MIDDLEWARE_CLASSES = (
@@ -121,6 +132,7 @@ INSTALLED_APPS = (
     'south',
     'compressor',
     'djcelery',
+    'singly',
     
     'twizzlio.core',
     'twizzlio.players'
@@ -160,3 +172,7 @@ THUMBNAIL_DUMMY_SOURCE = 'http://placehold.it/%(width)sx%(height)s'
 
 from secrets import *
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'singly.backends.SinglyBackend',
+)

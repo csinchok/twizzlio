@@ -1,7 +1,11 @@
 {% extends "base.html" %}
+{% load singly %}
 
 {% block title %}Twizzlio Home{% endblock %}
 
 {% block content %}
 Index goes here.
+Welcome, {{ user.username }}
+<a href="{% singly_login_url 'facebook' %}">Login With Facebook</a>
+<a href="{% singly_login_url 'twitter' %}">Login With Twitter</a>
 {% endblock %}

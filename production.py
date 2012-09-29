@@ -10,7 +10,7 @@ DATABASES = {
     }
 }
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 CELERY_ALWAYS_EAGER = False

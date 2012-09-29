@@ -96,7 +96,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'twizzlio.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'twizzlio.wsgi.application'
@@ -122,7 +122,7 @@ INSTALLED_APPS = (
     'compressor',
     'djcelery',
     
-    'core'
+    'twizzlio.core'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -158,10 +158,3 @@ THUMBNAIL_DUMMY_SOURCE = 'http://placehold.it/%(width)sx%(height)s'
 
 from secrets import *
 
-
-CELEB_LIST = [
-    "kimkardashian": {
-        "twitter": "KimKardashian",
-        "facebook": "KimKardashian"
-    }
-]

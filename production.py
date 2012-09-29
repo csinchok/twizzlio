@@ -1,4 +1,4 @@
-from busitizer.settings import *
+from settings import *
 
 DATABASES = {
     'default': {

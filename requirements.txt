@@ -11,7 +11,9 @@ django-compressor==1.2
 gunicorn==0.14.6
 kombu==2.4.7
 meld3==0.6.9
+psycopg2==2.4.5
 pycrypto==2.6
+pylibmc==1.2.3
 python-dateutil==1.5
 requests==0.14.0
 requests-oauth==0.4.1

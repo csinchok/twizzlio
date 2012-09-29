@@ -19,10 +19,10 @@ def virtualenv():
             yield
 
 def deploy():
-    rsync_project(env.webroot, delete=True, exclude=['lib', 'bin', 'include', 'lib', '*.db', '*.pyc', '.git', 'twizzlio/webroot/static', 'twizzlio/webroot/media'])
+    rsync_project(env.webroot, delete=True, exclude=['lib', 'bin', 'include', 'lib', '*.db', '*.pyc', '.git', 'webroot/static', 'twizzlio/webroot/media'])
     with virtualenv():
         run('pip install -r requirements.txt')
-        run('python manage.py collectstatic --noinput')
-        run('DJANGO_SETTINGS_MODULE=twizzlio.production python manage.py syncdb --noinput')
-        run('DJANGO_SETTINGS_MODULE=twizzlio.production python manage.py migrate')
+        run('DJANGO_SETTINGS_MODULE=production python manage.py collectstatic --noinput')
+        run('DJANGO_SETTINGS_MODULE=production python manage.py syncdb --noinput')
+        run('DJANGO_SETTINGS_MODULE=production python manage.py migrate')
         run('supervisorctl reload')

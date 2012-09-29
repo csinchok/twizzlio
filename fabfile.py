@@ -10,7 +10,7 @@ env.hosts = ['66.175.213.211']
 env.user = 'fabric'
 env.webroot = '/www/'
 env.projectroot = os.path.join(env.webroot, 'twizzlio')
-env.activate = 'source .env/bin/activate'
+env.activate = 'source bin/activate'
 
 @_contextmanager
 def virtualenv():
@@ -19,7 +19,7 @@ def virtualenv():
             yield
 
 def deploy():
-    rsync_project(env.webroot, delete=True, exclude=['.env', '*.db', '*.pyc', '.git', 'twizzlio/webroot/static', 'twizzlio/webroot/media'])
+    rsync_project(env.webroot, delete=True, exclude=['lib', 'bin', 'include', 'lib', '*.db', '*.pyc', '.git', 'twizzlio/webroot/static', 'twizzlio/webroot/media'])
     with virtualenv():
         run('pip install -r requirements.txt')
         run('python manage.py collectstatic --noinput')

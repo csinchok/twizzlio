@@ -1,0 +1,7 @@
+Django==1.4.1
+South==0.7.6
+django-appconf==0.5
+django-compressor==1.2
+requests==0.14.0
+requests-oauth==0.4.1
+wsgiref==0.1.2

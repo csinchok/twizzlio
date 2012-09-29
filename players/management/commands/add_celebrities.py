@@ -18,5 +18,3 @@ class Command(BaseCommand):
             celeb, created = BrandPlayer.objects.get_or_create(name=line[0], twitter_handle=line[1], type="celeb", facebook_name=facebook_name)
             celeb.import_facebook()
             celeb.import_twitter()
-            
-            

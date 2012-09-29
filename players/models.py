@@ -2,6 +2,8 @@ import datetime
 import requests
 
 from django.conf import settings
+from django.contrib.auth.models import User
+
 from django.db import models
 from django.db.utils import IntegrityError
 
@@ -13,7 +15,7 @@ class Player(models.Model):
     name = models.CharField(max_length=255)
     photo = models.URLField(null=True)
     
-    user_id = models.IntegerField(null=True)
+    user = models.ForeignKey(User, null=True)
     
     def score(self, date, service):
         if self.type == "brand" or self.type == "celeb":

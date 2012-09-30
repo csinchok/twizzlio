@@ -17,7 +17,6 @@ body {
 
 table td.table-no-data {
 	text-align:center;
-	font-style: italic;
 }
 
 .score {
@@ -30,9 +29,21 @@ table td.table-no-data {
 
 
 /* head to head page */
+
 table.slot-group tbody img {height:24px}
+
 table.slot-group tbody td {
 	line-height: 24px;
+}
+
+#player-results li img {
+  height:32px;
+  width:32px;
+}
+
+#player-results li {
+  list-style:none;
+  line-height:32px;
 }
 
 .slot-group td.total {
@@ -55,4 +66,20 @@ table.slot-group tbody td {
 .faq_a {
 	margin-bottom:24px;
 	
+}
+
+.box {
+  position: relative;
+  margin: 15px 0;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #DDD;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+
+.modal {
+
 }

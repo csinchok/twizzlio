@@ -1,5 +1,8 @@
 import json
 
+import datetime
+
+from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -15,6 +18,32 @@ from players.models import *
 
 from utils import json_response
 
+class PlayerDetailView(DetailView):
+    
+    model = Player
+    
+    def get_context_data(self, **kwargs):
+        context = super(PlayerDetailView, self).get_context_data(**kwargs)
+        
+        start_date = datetime.datetime.now() - datetime.timedelta(weeks=2)
+        scores = []
+        for day in xrange(14):
+            end_date = start_date + datetime.timedelta(days=1)
+            if self.object.brandplayer:
+                scores.append({
+                    'date': start_date.strftime('%m/%d'),
+                    'facebook': self.object.score(start_date, end_date, BrandFacebookData),
+                    'twitter': self.object.score(start_date, end_date, BrandTwitterData),
+                })
+            else:
+                scores.append({
+                    'date': start_date.strftime('%m/%d'),
+                    'facebook': self.object.score(start_date, end_date, FacebookData),
+                    'twitter': self.object.score(start_date, end_date, TwitterData),
+                })
+            start_date = end_date
+        context['scores'] = scores
+        return context
 
 class PlayerList(ListView):
     model = Player

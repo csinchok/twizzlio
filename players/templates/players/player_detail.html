@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %}{{ player.name }}{% endblock %}
+
+{% block content %}
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load('visualization', '1', {packages: ['corechart']});
+</script>
+<script type="text/javascript">
+  function drawVisualization() {
+    // Create and populate the data table.
+    var data = google.visualization.arrayToDataTable([
+      ['Date', 'Facebook', 'Twitter'],
+	  {% for score in scores %}
+	  ['{{score.date}}', {{score.facebook}}, {{score.twitter}}],
+	  {% endfor %}
+    ]);
+      
+    // Create and draw the visualization.
+    new google.visualization.LineChart(document.getElementById('visualization')).
+        draw(data, {curveType: "function",
+                    width: 500, height: 400,
+                    vAxis: {maxValue: 10}}
+            );
+  }
+  google.setOnLoadCallback(drawVisualization);
+</script>
+<div class="row">
+	<div class="span3">
+		<h2>{{player.name}}</h2>
+		<a href="#" class="thumbnail">
+		{% thumbnail player.photo "210" crop="center" as im %}
+		    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+		{% endthumbnail %}
+		</a>
+	</div>
+	<div class="span4">
+	    <div id="visualization" style="width: 500px; height: 400px;"></div>
+	</div>
+</div>
+{% endblock %}

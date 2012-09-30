@@ -13,6 +13,7 @@ from utils import json_response
 
 # Create your views here.
 
+
 @login_required
 def user_search(request):
     search = request.GET.get('search', '')

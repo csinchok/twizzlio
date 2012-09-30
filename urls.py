@@ -8,6 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^', include('core.urls')),
+    url(r'^players/', include('players.urls')),
     url(r'^singly/', include('singly.urls')),
     
 

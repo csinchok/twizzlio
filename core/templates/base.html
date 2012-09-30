@@ -1,4 +1,5 @@
 {% load compress %}
+{% load singly %}
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -31,24 +32,36 @@
 
 </head>
 <body>
-	{% block header %}
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand logo" href="/">Twizzlio</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="/new">New Game</a></li>
-              <li class="active"><a href="/matchups">Matchups</a></li>
-              <li class="active"><a href="/about">About</a></li>
-            </ul>
-            <form class="navbar-form pull-right">
-              <button type="button" class="btn">Sign in</button>
-            </form>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+	{% block header %}	
+	    <div class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="navbar-inner">
+	        <div class="container">
+	          <a class="active brand logo" href="/">Twizzlio</a>
+	          <div class="nav-collapse collapse">
+	            <ul class="nav">
+				  {% if user.is_authenticated %}
+					
+	              <li><a href="/new">New Game</a></li>
+	              <li><a href="/matchups">Matchups</a></li>
+	              {% endif %}
+				  <li><a href="/about">About</a></li>
+	            </ul>
+	            <div class="pull-right">
+				    {% if user.is_authenticated %}
+					Hi, {{ user.first_name }}
+  	              	<button type="button" class="btn">Sign out</button>
+					
+				    {% else %}
+						Sign in:
+					    <a class="btn" href="{% singly_login_url 'facebook' %}">FB</a>
+					    <a class="btn" href="{% singly_login_url 'twitter' %}">TW</a>
+					{% endif %}
+	            </div>
+	          </div><!--/.nav-collapse -->
+	        </div>
+	      </div>
+	    </div>
+	
 	{% endblock %}
 	
     <div class="container">	

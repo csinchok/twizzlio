@@ -22,6 +22,9 @@ urlpatterns = patterns('core.views',
     url(r'^corporate$', TemplateView.as_view(template_name="corporate.html"), name="corporate"),
     url(r'^investors$', TemplateView.as_view(template_name="investors.html"), name="investors"),
     url(r'^brands$', TemplateView.as_view(template_name="brands.html"), name="brands"),
+<<<<<<< HEAD
 
     url(r'^profile$', 'profile'),
+=======
+>>>>>>> inplace search for new game + fill
 )

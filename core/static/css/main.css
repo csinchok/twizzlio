@@ -44,21 +44,6 @@ table.slot-group tbody td {
 	line-height: 24px;
 }
 
-#player-results li img {
-  height:32px;
-  width:32px;
-}
-.player-list li { 
-  margin-bottom: 6px 0;
-  padding-bottom: 6px;
-  background-color: white;
-  border-bottom: 1px solid #DDD;
-}
-
-#player-results li {
-  list-style:none;
-  line-height:32px;
-}
 
 .slot-group td.total {
 	font-weight: bold;
@@ -100,4 +85,21 @@ table.slot-group tbody td {
 
 .btn>span {
 line-height:15px
+}
+
+/* player search*/
+.player-results li img {
+  height:32px;
+  width:32px;
+}
+.player-list li { 
+  margin-bottom: 6px 0;
+  padding-bottom: 6px;
+  background-color: white;
+  border-bottom: 1px solid #DDD;
+}
+
+.player-results li {
+  list-style:none;
+  line-height:32px;
 }

@@ -100,5 +100,4 @@ class PlayerList(ListView):
         )
     
     
-    
         

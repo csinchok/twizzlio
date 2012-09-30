@@ -23,4 +23,4 @@ sorl-thumbnail==11.12
 superlance==0.7
 supervisor==3.0a10
 wsgiref==0.1.2
--e git+https://github.com/csinchok/django-singly.git@8ce2f1bc74787fd364e59f7beaf883fad74c98bc#egg=singly
+-e git+https://github.com/csinchok/django-singly.git@301998c87e6278576929f96318ff3fa9ea8afdf9#egg=singly

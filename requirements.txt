@@ -25,4 +25,4 @@ ssh==1.7.14
 superlance==0.7
 supervisor==3.0a10
 wsgiref==0.1.2
--e git+https://github.com/csinchok/django-singly.git@50e67c7b0a76c7b55e2d40a40640eb69c1fdcbef#egg=singly
+-e git+https://github.com/csinchok/django-singly.git@bb19a984f5254cb61661daf68b90e1efeeed6aa7#egg=singly

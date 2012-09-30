@@ -51,7 +51,7 @@
 	            </ul>
 	            <div class="pull-right">
 				    {% if user.is_authenticated %}
-					Hi, {{ user.first_name }}
+					Hi, {{ user.first_name }} <a href="/profile">[edit]</a>
   	              	<button type="button" class="btn">Sign out</button>
 					
 				    {% else %}

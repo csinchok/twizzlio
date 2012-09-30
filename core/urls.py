@@ -6,7 +6,10 @@ urlpatterns = patterns('core.views',
     url(r'^new$', TemplateView.as_view(template_name="new.html"), name="new"),
 
     #listing of matchups
-    url(r'^matchups$', TemplateView.as_view(template_name="matchups.html"), name="matchups"), 
+    # url(r'^matchups$', TemplateView.as_view(template_name="matchups.html"), name="matchups"), 
+
+    url(r'^matchups$', 'matchups'),
+
 
     #head to head view
     url(r'^game/(?P<game_id>\d)$', 'game'),

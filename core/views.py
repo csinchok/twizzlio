@@ -60,6 +60,18 @@ def game(request, game_id):
         }, context_instance=RequestContext(request))
 
 @login_required
+def matchups(request):
+    rosters = Roster.objects.filter(user=request.user)
+    games = [{
+        'id': roster.game.id,
+        'opponent': roster.game.roster_set.exclude(id=roster.id)[0].user.get_full_name(),
+        
+    } for roster in rosters]
+    return render_to_response("matchups.html", 
+        {"games": games,
+        }, context_instance=RequestContext(request))
+
+@login_required
 def profile(request):
     
     services = [

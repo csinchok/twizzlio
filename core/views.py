@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from core.models import *
@@ -21,7 +21,7 @@ def user_choose(request):
     
     return json_response({
         "page": page,
-        "data": [{"id": user.id, "username": user.username } for user in User.objects.filter(singly__isnull=False, username__contains=search)]
+        "data": [{"id": user.id, "username": user.username, "name": user.get_full_name(), 'photo': "http://placehold.it/40x40"} for user in User.objects.filter(singly__isnull=False, username__contains=search)]
     })
     
     
@@ -44,10 +44,7 @@ def create_game(request):
     
 @login_required
 def game(request, game_id):
-    try:
-        game = Game.objects.get(game_id)
-    except:
-        return render_to_response("500.html")
+    game = get_object_or_404(Game, id=game_id)
         
     rosters = Roster.objects.filter(game=game)
     

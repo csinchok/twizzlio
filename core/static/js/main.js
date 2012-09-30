@@ -51,7 +51,7 @@ var search= {
   player_type: "player",
   page: 0,
   init: function() {
-    $(".search-search").keyup(this.keyup_handler);
+    $(".search-box").keyup(this.keyup_handler);
     
     $(".search-prev").click(this.prev);
     $(".search-next").click(this.next);

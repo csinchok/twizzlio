@@ -9,9 +9,6 @@ from django.contrib.auth.models import User
 
 from players.models import *
 
-month_ago = datetime.date(2012, 8, 29)
-begin_date = datetime.date(2012, 9, 29)
-
 class Command(BaseCommand):
     def handle(self, *args, **options):    
         for player in Player.objects.select_related('brandplayer').all():
@@ -30,6 +27,8 @@ def fake_brand(player):
     
         date = earliest_data.date - datetime.timedelta(days=1)
         last_data = earliest_data
+        
+        month_ago = date - datetime.timedelta(days=30)
     
         while date > month_ago:
         
@@ -51,6 +50,8 @@ def fake_brand(player):
     
         date = earliest_data.date - datetime.timedelta(days=1)
         last_data = earliest_data
+        
+        month_ago = date - datetime.timedelta(days=30)
     
         while date > month_ago:                
             likes = last_data.likes - int(last_data.likes * (randrange(0,1)/1000))
@@ -76,6 +77,8 @@ def fake_player(player):
         
         date = earliest_data.date - datetime.timedelta(days=1)
         last_data = earliest_data
+        
+        month_ago = date - datetime.timedelta(days=30)
     
         while date > month_ago:
         
@@ -96,6 +99,8 @@ def fake_player(player):
         earliest_data = earliest_data[0]    
         date = earliest_data.date - datetime.timedelta(days=1)
         last_data = earliest_data
+        
+        month_ago = date - datetime.timedelta(days=30)
     
         while date > month_ago:                
             friends = last_data.friends - int(last_data.friends * (randrange(0,1)/10))

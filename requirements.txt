@@ -1,3 +1,4 @@
+## The following requirements were added by pip --freeze:
 Django==1.4.1
 Fabric==1.4.3
 Pillow==1.7.7
@@ -18,9 +19,10 @@ pylibmc==1.2.3
 python-dateutil==1.5
 requests==0.14.0
 requests-oauth==0.4.1
-ssh==1.7.14
+simplejson==2.6.2
 sorl-thumbnail==11.12
+ssh==1.7.14
 superlance==0.7
 supervisor==3.0a10
 wsgiref==0.1.2
--e git+https://github.com/csinchok/django-singly.git@301998c87e6278576929f96318ff3fa9ea8afdf9#egg=singly
+-e git+https://github.com/csinchok/django-singly.git@50e67c7b0a76c7b55e2d40a40640eb69c1fdcbef#egg=singly

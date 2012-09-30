@@ -18,9 +18,11 @@
       <span>Brandz.</span>
       <span>Celebz.</span>
       <span>Influence.</span>
-      <span>Gamifying Influence.</span>
+      <span>Gamification.</span>
+      <span>Gamifying influence.</span>
       <span>Brand Influencers.</span>
       <span>Influential Celebz.</span>
+      <span>Badging.</span>
       <span>Money.</span>
       <span>Lots of money.</span>
       <span>Privacy.</span>
@@ -48,8 +50,8 @@ var slides = $(".text-slideshow>span");
 var speed = 1000
 function update_slideshow() {
   $(".text-slideshow>span").hide();
-  speed -= speed * .05;
-  if (speed < 100) {
+  speed -= speed * .02;
+  if (speed < 10) {
     speed = 2000;
   }
   if (index > slides.length-1) {

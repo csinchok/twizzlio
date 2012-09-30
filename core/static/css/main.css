@@ -20,7 +20,8 @@ p.hero-unit {
 }
 
 .hero-unit {
-	text-align:center;
+  font-size: 60px;
+  line-height:75px;
 }
 
 table td.table-no-data {

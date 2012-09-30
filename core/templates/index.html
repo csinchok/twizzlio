@@ -4,17 +4,63 @@
 {% block title %}Twizzlio{% endblock %}
 
 {% block content %}
+<style type="text/css">
+.text-slideshow>span {display:none}
+</style>
 
-<div class="hero-unit">
-  <span>Welcome to</span>
-  <h1 class="logo">Twizzlio</h1>
-  <div>Gamifying Social Influence</div>  
-  {% if user.is_authenticated %}
-  Welcome, {{ user.username }}
-  {% else %}
-  <a class="btn" href="{% singly_login_url 'facebook' %}">Login With Facebook</a>
-  <a class="btn" href="{% singly_login_url 'twitter' %}">Login With Twitter</a>
-  {% endif %}
+<div class='hero-unit'>  
+
+    <h1 style="display:inline" class="logo">Twizzlio</h1>
+    <span class="icon-heart" style="width: 37px;height: 32px; color: #BB0202;line-height: 42px;text-align: center;"></span>
+    <span class="text-slideshow">
+      <span>You.</span>
+      <span>Your Friends.</span>
+      <span>Brandz.</span>
+      <span>Celebz.</span>
+      <span>Influence.</span>
+      <span>Gamifying Influnce.</span>
+      <span>Brand Influencers.</span>
+      <span>Influential Celebz.</span>
+      <span>Money.</span>
+      <span>Lots of money.</span>
+      <span>Privacy.</span>
+      <span>Gamifying Privacy.</span>
+      <span>Tracking.</span>
+      <span>Data Mining.</span>
+      <span>Advertising.</span>
+      <span>Tom Brady.</span>
+    </span>
 </div>
 
+<div class="row">
+  <div class="span12" style="text-align:center">
+    {% if user.is_authenticated %}
+    Welcome, {{ user.username }}
+    {% else %}
+    <a class="btn" href="{% singly_login_url 'facebook' %}">Login With Facebook</a>
+    <a class="btn" href="{% singly_login_url 'twitter' %}">Login With Twitter</a>
+    {% endif %}
+  </div>
+</div>
+<script type="text/javascript">
+var index = 0;
+var slides = $(".text-slideshow>span");
+var speed = 1000
+function update_slideshow() {
+  $(".text-slideshow>span").hide();
+  speed -= speed * .05;
+  if (speed < 100) {
+    speed = 2000;
+  }
+  if (index > slides.length-1) {
+    index = 0;
+  }
+  $(slides[index]).show()
+  index+=1;
+
+  setTimeout(update_slideshow, speed)
+  
+}
+update_slideshow(); 
+</script>
 {% endblock %}

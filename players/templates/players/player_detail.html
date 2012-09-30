@@ -21,7 +21,7 @@
     // Create and draw the visualization.
     new google.visualization.LineChart(document.getElementById('visualization')).
         draw(data, {curveType: "function",
-                    width: 700, height: 400,
+                    width: 500, height: 400,
                     vAxis: {maxValue: 10}}
             );
   }
@@ -36,8 +36,8 @@
 		{% endthumbnail %}
 		</a>
 	</div>
-	<div class="span6">
-	    <div id="visualization" style="width: 700px; height: 400px;"></div>
+	<div class="span4">
+	    <div id="visualization" style="width: 500px; height: 400px;"></div>
 	</div>
 </div>
 {% endblock %}

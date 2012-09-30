@@ -1,6 +1,8 @@
 import datetime
 import requests
 
+from math import log
+
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -24,14 +26,14 @@ class Player(models.Model):
         datum = Service.objects.filter(player=self, date__gte=start_date, date__lte=end_date)
         total = 0
         for data in datum:
-            total+= data.compute_score()
+            total += data.compute_score()
         return total / datum.count()
     
     def score(self, start_date, end_date, Service):
         try:
             start_service = Service.objects.get(player=self, date=start_date.date)
-            end_service = Service.objects.get(player=self, date=end_date.dates)
-            return end_service - start_service
+            end_service = Service.objects.get(player=self, date=end_date.date)
+            return end_service.compute_score() - start_service.compute_score()
         except:
             return 0   
             
@@ -129,7 +131,7 @@ class BrandPlayer(Player):
         except:
             twitter_score = 0
             
-        return facebook_score + twitter_score
+        return log(facebook_score + twitter_score)
             
     def str(self):
         return self.name

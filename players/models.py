@@ -18,7 +18,7 @@ class Player(models.Model):
     has_twitter = models.BooleanField(default=False)
     has_facebook = models.BooleanField(default=False)
     
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User, null=True, blank=True)
     
     def score(self, start_date, end_date, Service):
         try:
@@ -67,24 +67,27 @@ class Player(models.Model):
         twitter.save()
         
     def save(self, *args, **kwargs):
+        if self.user:
+            access_token = self.user.singly.access_token
         
-        access_token = self.user.singly.access_token
-        
-        r = requests.get("%sv0/profile?access_token=%s" % (singly_url, access_token))
+            r = requests.get("%sv0/profile?access_token=%s" % (singly_url, access_token))
                 
-        photo = r.json.get("thumbnail_url", None)
-        if photo:
-            self.photo = photo
+            photo = r.json.get("thumbnail_url", None)
+            if photo:
+                self.photo = photo
             
-        services = r.json.get("services", None)
-        if services:
-            if services.get("twitter", None):
-                self.has_twitter = True
-            if services.get("facebook", None):
-                self.has_facebook = True
+            services = r.json.get("services", None)
+            if services:
+                if services.get("twitter", None):
+                    self.has_twitter = True
+                if services.get("facebook", None):
+                    self.has_facebook = True
                 
         super(Player, self).save(*args, **kwargs)
-                        
+    
+    def __unicode__(self):
+        return self.name
+                
     class Meta:
         unique_together = ('name', 'user')
 

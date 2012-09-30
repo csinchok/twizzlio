@@ -46,17 +46,17 @@ def game(request, game_id):
     try:
         game = Game.objects.get(game_id)
     except:
-        return render_to_response("core/templates/500.html")
+        return render_to_response("500.html")
         
     rosters = Roster.objects.filter(game=game)
     
     user_roster = rosters.filter(user=request.user)
     
-    return render_to_response("core/templates/game.html", 
+    return render_to_response("game.html", 
         {"game": game,
          "user_roster": user_roster, 
          "opponent_roster": opponent_roster
-        })
+        }, context_instance=RequestContext(request))
 
 @login_required
 def profile(request):

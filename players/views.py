@@ -14,6 +14,8 @@ from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 
+from sorl.thumbnail import get_thumbnail
+
 from players.models import *
 
 from utils import json_response
@@ -58,18 +60,18 @@ class PlayerList(ListView):
         search = request.GET.get('search', '')
         page = int(request.GET.get('page', 1))
         
+        search_kwargs = {'name__icontains': search}
+        
         if player_type == "facebook":
-            players = Player.objects.filter(has_facebook=True)
+            search_kwargs['has_facebook'] = True
         elif player_type == "twitter":
-            players = Player.objects.filter(has_twitter=True)
+            search_kwargs['has_twitter'] = True
         elif player_type == "brands":
-            players = BrandPlayer.objects.filter(type=BrandPlayer.BRAND)
+            search_kwargs['brandplayer__type'] = BrandPlayer.BRAND            
         elif player_type == "celebs":
-            players = BrandPlayer.objects.filter(type=BrandPlayer.CELEB)
-        else:
-            players = Player.objects.all()
+            search_kwargs['brandplayer__type'] = BrandPlayer.CELEB
             
-        players = players.filter(name__icontains=search)
+        players = Player.objects.filter(**search_kwargs)
          
         paginator = Paginator(players, 5)
             
@@ -91,7 +93,7 @@ class PlayerList(ListView):
                   "data": [{
                      "id": player.id, 
                      "name": player.name, 
-                     "photo": player.photo.url} for player in context['object_list']]}
+                     "photo": get_thumbnail(player.photo, '40x40', crop='center').url} for player in context['object_list']]}
         
         response_kwargs['content_type'] = 'application/json'
         return HttpResponse(

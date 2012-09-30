@@ -16,7 +16,9 @@ urlpatterns = patterns('core.views',
     
     url(r'^users/choose/$', 'user_choose'),
     url(r'^create_game/$', 'create_game'),
-
+    url(r'^roster/fill_slot$', 'fill_slot'),
+    url(r'^roster/empty_slot$', 'empty_slot'),
+    
     url(r'^corporate$', TemplateView.as_view(template_name="corporate.html"), name="corporate"),
     url(r'^investors$', TemplateView.as_view(template_name="investors.html"), name="investors"),
     url(r'^brands$', TemplateView.as_view(template_name="brands.html"), name="brands"),

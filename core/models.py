@@ -12,6 +12,9 @@ class Game(models.Model):
     # duration in minutes
     duration = models.IntegerField()
     is_active = models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return " vs. ".join([roster.user.get_full_name() for roster in self.roster_set.all()])
 
 class Roster(models.Model):
     game = models.ForeignKey(Game)
@@ -28,7 +31,7 @@ class Roster(models.Model):
     
     instagram_1 = models.ForeignKey(Player, related_name="instagram_1", null=True, blank=True)
     tumblr_1 = models.ForeignKey(Player, related_name="tumblr_1", null=True, blank=True)
-    
+        
     def is_full(self):
         return self.celeb_1 is not None and self.brand_1 is not None and self.facebook_1 is \
             not None and self.facebook_2 is not None and self.twitter_1 is not None \

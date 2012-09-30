@@ -19,16 +19,21 @@ var roster_ui = {
 	remove: function() {
 		var slot = $($(this).parents(".slot")[0]);
 		var id = slot.attr("data-id");
-		if (confirm("Are you sure you want to remove " + id + "	?")) {
+		var name = slot.attr("data-name");
+		if (confirm("Are you sure you want to remove " + name + "?")) {
 			//ajax remove, replace row with "empty slot"
-
-			slot.parents(".resuts");
-			$.ajax({
-				url: "/api/remove",
-				error: function() {
-					
-				}
-			})
+			
+			var group = $($(this).parents(".slot-group")[0]);
+			var type = group.attr("data-type");
+			var roster_id = $('#yourteam').attr('data-roster-id')
+			
+		  $.ajax({
+		    url: "/roster/empty_slot?roster_id=" + roster_id + "&type=" + type,
+		    success: function() {
+		      //reload the page for now
+		      window.location = window.location;
+		    }
+		  });
 		}
 		return false;
 	},
@@ -110,7 +115,8 @@ var search= {
       start_game(id)
     }
     else if (search.action == "fill_slot") {
-      fill_slot(id, search.player_type);
+			var roster_id = $('#yourteam').attr('data-roster-id')
+      fill_slot(id, search.player_type, roster_id);
     }
   }
   
@@ -141,11 +147,15 @@ function start_game(user_id) {
   
 }
 
-function fill_slot(player_id, player_type) {
+function empty_slot(player_id, player_type, roster_id) {
+
+}
+
+function fill_slot(player_id, player_type, roster_id) {
   //ajax request
  
   $.ajax({
-    url: "/roster/fill_slot/?roster_id=" + roster_id + "&type=" + player_type + "&player_id=" + player_id,
+    url: "/roster/fill_slot?roster_id=" + roster_id + "&type=" + player_type + "&player_id=" + player_id,
     success: function() {
       //reload the page for now
       window.location = window.location;

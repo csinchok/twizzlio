@@ -1,0 +1,21 @@
+{% load thumbnail %}
+{% if player %}
+  <tr class="slot" data-celeb-id="{{player.id}}" data-id="{{player.id}}" data-name="{{player.name}}">
+    <td>&nbsp;</td>
+    <td>
+	{% thumbnail player.photo "24x24" crop="center" as im %}
+	    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+	{% endthumbnail %}
+	{{player.name}}
+    </td>
+    <td>10</td>
+    <td>10</td>          
+    <td class="total">200</td>
+  </tr>
+{% else %}
+  <tr  class="slot" data-id="">
+    <td colspan="5" class="table-no-data">
+		<i>Empty Slot</i>
+    </td>
+  </tr>  
+{% endif %}  

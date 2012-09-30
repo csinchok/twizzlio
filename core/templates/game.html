@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 
 {% block title %}Twizzlio Home{% endblock %}
 
@@ -14,9 +15,9 @@ var roster_id = 1{# roster.id #};
 <div class="row">
   <div class="span6">
     
-    <h2 class="teamname">Your Team</h2>
+    <h2 class="teamname">{{user_roster.user.get_full_name}}'s Team</h2>
 
-    <table id="yourteam" class="table table-striped slot-group facebook-results" data-type="facebook">
+    <table data-roster-id="{{user_roster.id}}" id="yourteam" class="table table-striped slot-group facebook-results" data-type="facebook">
       <thead>
         <tr>
           <th></th>
@@ -28,22 +29,8 @@ var roster_id = 1{# roster.id #};
         </tr>
       </thead>
       <tbody>
-        <tr class="slot" data-id="1234">
-          <td><button type="button" class="close remove">&times;</button></td>
-          <td>
-            <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/275695_768467844_144667747_q.jpg">
-            Rob C.
-          </td>
-          <td>10</td>
-          <td>20</td>
-          <td>10</td>          
-          <td class="total">200</td>
-        </tr>
-        <tr class="slot" data-id="1234">
-          <td colspan="6" class="table-no-data">
-            <a href="#" role="button" class="btn fill_slot" >Fill Slot</a>
-          </td>
-        </tr> 
+  		 {% include "snippets/editable_slot.html" with player=user_roster.facebook_1 %}
+		 {% include "snippets/editable_slot.html" with player=user_roster.facebook_2 %}
       </tbody>
     </table>
 
@@ -58,21 +45,8 @@ var roster_id = 1{# roster.id #};
         </tr>
       </thead>
       <tbody>
-        <tr class="slot" data-twitter-id="1234">
-          <td><button type="button" class="close remove">&times;</button></td>
-          <td>
-            <img src="https://twimg0-a.akamaihd.net/profile_images/2610763144/1f8850kb8il0hajhxhoo_normal.jpeg">
-            @johncraig
-          </td>
-          <td>10</td>
-          <td>20</td>
-          <td class="total">200</td>
-        </tr>
-        <tr  class="slot" data-id="1234">
-          <td colspan="5" class="table-no-data">
-            <a href="#" role="button" class="btn fill_slot" >Fill Slot</a>
-          </td>
-        </tr>       
+   		 {% include "snippets/editable_slot.html" with player=user_roster.twitter_1 %}
+ 		 {% include "snippets/editable_slot.html" with player=user_roster.twitter_2 %}  
       </tbody>
     </table>
     
@@ -88,21 +62,7 @@ var roster_id = 1{# roster.id #};
         </tr>
       </thead>
       <tbody>
-        <tr class="slot" data-celeb-id="1234">
-          <td><button type="button" class="close remove">&times;</button></td>
-          <td>
-            <img src="https://twimg0-a.akamaihd.net/profile_images/2385531870/ffb6obdzkxc3pk7lvbw2_reasonably_small.jpeg">
-            Justin Bieber
-          </td>
-          <td>10</td>
-          <td>10</td>          
-          <td class="total">200</td>
-        </tr>
-        <tr  class="slot" data-id="1234">
-          <td colspan="5" class="table-no-data">
-            <a href="#" role="button" class="btn fill_slot" >Fill Slot</a>
-          </td>
-        </tr>         
+ 		 {% include "snippets/editable_slot.html" with player=user_roster.celeb_1 %}
       </tbody>
     </table>
 
@@ -118,37 +78,81 @@ var roster_id = 1{# roster.id #};
         </tr>
       </thead>
       <tbody>
-        <tr class="slot" data-id="1234">
-          <td><button type="button" class="close remove">&times;</button></td>
-          <td>
-            <img src="https://twimg0-a.akamaihd.net/profile_images/2646120075/6f47612a4041e851a02f1e2c06d607fc_bigger.jpeg">
-            Tide
-          </td>
-          <td>10</td>
-          <td>10</td>          
-          <td class="total">200</td>
-        </tr>
-        <tr class="slot" data-id="1234">
-          <td><button type="button" class="close remove">&times;</button></td>
-          <td>
-            <img src="https://twimg0-a.akamaihd.net/profile_images/2257169447/profile_reasonably_small.jpeg">
-            Stride
-          </td>
-          <td>10</td>
-          <td>10</td>          
-          <td class="total">200</td>
-        </tr>
-        <tr class="slot" data-id="">
-          <td colspan="5" class="table-no-data">
-            <a href="#" role="button" class="btn fill_slot" >Fill Slot</a>
-          </td>
-        </tr>      
+  		 {% include "snippets/editable_slot.html" with player=user_roster.brand_1 %}
       </tbody>
     </table>
     <div class="team-total">Total Points: 100</div>
   </div>
+  
+  <!-- OPPONENT -->
+  
   <div class="span6">
-    <h2 class="teamname">Friend's Team</h2>
+    <h2 class="teamname">{{opponent_roster.user.get_full_name}}'s Team</h2>
+    <table data-roster-id="{{opponent_roster.id}}" id="otherteam" class="table table-striped slot-group facebook-results" data-type="facebook">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Facebook User</th>
+          <th>Likes</th>
+          <th>Commented</th>  
+          <th>New friends</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+  		 {% include "snippets/slot.html" with player=opponent_roster.facebook_1 %}
+		 {% include "snippets/slot.html" with player=opponent_roster.facebook_2 %}
+      </tbody>
+    </table>
+
+    <table class="table table-striped slot-group twitter-results" data-type="twitter">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Twitter User</th>
+          <th>RTs</th>
+          <th>New followers</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+   		 {% include "snippets/slot.html" with player=opponent_roster.twitter_1 %}
+ 		 {% include "snippets/slot.html" with player=opponent_roster.twitter_2 %}  
+      </tbody>
+    </table>
+    
+
+    <table class="table table-striped slot-group celeb-results" data-type="celebs">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Sexy Celeb</th>
+          <th>FB Pts</th>
+          <th>Twitter Pts</th>  
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+ 		 {% include "snippets/slot.html" with player=opponent_roster.celeb_1 %}
+      </tbody>
+    </table>
+
+
+    <table class="table table-striped slot-group brand-results" data-type="brands">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Kewl Brand</th>
+          <th>FB Pts</th>
+          <th>Twitter Pts</th>  
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+  		 {% include "snippets/slot.html" with player=opponent_roster.brand_1 %}
+      </tbody>
+    </table>
+    <div class="team-total">Total Points: 100</div>
   </div>
 </div>
 
@@ -176,7 +180,7 @@ var roster_id = 1{# roster.id #};
   </div>
   <div class="modal-body">
     Search
-    <div class="search-finder" data-button-label="Add" data-url="/players/choose">
+    <div class="search-finder" data-button-label="Add" data-url="/players/choose" data-action="fill_slot" >
     <input type="text" class="search-box">
     
     <ul class="search-results">

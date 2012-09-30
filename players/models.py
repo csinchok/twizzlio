@@ -20,10 +20,17 @@ class Player(models.Model):
     
     user = models.ForeignKey(User, null=True, blank=True)
     
+    def score_average(self, start_date, end_date, Service):
+        datum = Service.objects.filter(player=self, date__gte=start_date, date__lte=end_date)
+        total = 0
+        for data in datum:
+            total+= data.compute_score()
+        return total / datum.count()
+    
     def score(self, start_date, end_date, Service):
         try:
-            start_service = Service.objects.get(player=self, date=start_date)
-            end_service = Service.objects.get(player=self, date=end_date)
+            start_service = Service.objects.get(player=self, date=start_date.date)
+            end_service = Service.objects.get(player=self, date=end_date.dates)
             return end_service - start_service
         except:
             return 0   

@@ -32,14 +32,14 @@ class PlayerDetailView(DetailView):
             if self.object.brandplayer:
                 scores.append({
                     'date': start_date.strftime('%m/%d'),
-                    'facebook': self.object.score(start_date, end_date, BrandFacebookData),
-                    'twitter': self.object.score(start_date, end_date, BrandTwitterData),
+                    'facebook': self.object.score_average(start_date, end_date, BrandFacebookData),
+                    'twitter': self.object.score_average(start_date, end_date, BrandTwitterData),
                 })
             else:
                 scores.append({
                     'date': start_date.strftime('%m/%d'),
-                    'facebook': self.object.score(start_date, end_date, FacebookData),
-                    'twitter': self.object.score(start_date, end_date, TwitterData),
+                    'facebook': self.object.score_average(start_date, end_date, FacebookData),
+                    'twitter': self.object.score_average(start_date, end_date, TwitterData),
                 })
             start_date = end_date
         context['scores'] = scores

@@ -1,6 +1,4 @@
 
-
-
 var roster_ui = {
 	
 	init: function() {
@@ -53,18 +51,20 @@ var search= {
   player_type: "player",
   page: 0,
   init: function() {
-    $(".player-search").keyup(this.keyup_handler);
+    $(".search-search").keyup(this.keyup_handler);
     
-    $(".player-prev").click(this.prev);
-    $(".player-next").click(this.next);
-    this.button_label = $(".player-finder").attr("data-button-label");
-    this.url = $(".player-finder").attr("data-url");
+    $(".search-prev").click(this.prev);
+    $(".search-next").click(this.next);
+    this.button_label = $(".search-finder").attr("data-button-label");
+    this.action = $(".search-finder").attr("data-action");
+
+    this.url = $(".search-finder").attr("data-url");
     this.update();
   },
   set_type: function(type) {
     this.player_type = type;
     this.update();
-    $(".player-search").val("");
+    $(".search-search").val("");
   },
   keyup_handler: function() {
     clearTimeout(search.timeout);
@@ -72,22 +72,20 @@ var search= {
     
   },
   update: function() {
-    console.log("updatin'")
-    var term =  $(".player-search").val();
+    var term =  $(".search-box").val();
     $.ajax({
-      
       url: search.url + "?type=" + search.player_type + "&search=" + term + "&page=" + search.page,
       success: function(data) {
-        console.log(data);
-        $(".player-results").html("");
+        $(".search-results").html("");
         for (var i=0; i< data.data.length; i++) {
           var d = data.data[i];
-            $(".player-results").append("<li><img src='"+ d.photo +"'> "+ d.name +"\
-              <button id='" + d.id + "' class='btn btn-small btn-success pull-right'>" +search.button_label + "</button></li>");
+            $(".search-results").append("<li><img src='"+ d.photo +"'> "+ d.name +"\
+              <button id='" + d.id + "' class='btn search-action btn-small btn-success pull-right'>" +search.button_label + "</button></li>");
           
         }
+        $(".search-action").click(search.action_handler);
         if (data.data.length == 0) {
-          $(".player-results").html("<li>Sorry, no matching results</li>");
+          $(".search-results").html("<li>Sorry, no matching results</li>");
         }
       }
     })
@@ -103,6 +101,17 @@ var search= {
   next: function(e){
     search.page +=1;
     search.update();  
+  },
+  
+  //this isn't great
+  action_handler: function(e) {
+    var id = this.id;
+    if (search.action == "start_game") {
+      start_game(id)
+    }
+    else if (search.action == "fill_slot") {
+      fill_slot(id, search.player_type);
+    }
   }
   
   
@@ -111,8 +120,37 @@ var search= {
 
 $(document).ready(function() {
     roster_ui.init();
-    if ($(".player-finder").length == 1) {
+    if ($(".search-finder").length == 1) {
       search.init();
     }
 })
 
+
+function start_game(user_id) {
+  console.log("Starting game")
+  //ajax request to start game. returns id. 
+  
+  $.ajax({
+    url: "/create_game/?opp_id=" + user_id,
+    success: function(game_id) {
+      //redirect to /games/id (or whatever it ends up being)
+      window.location = "/game/" + game_id;
+    }
+  })
+  
+  
+}
+
+function fill_slot(player_id, player_type) {
+  //ajax request
+ 
+  $.ajax({
+    url: "/roster/fill_slot/?roster_id=" + roster_id + "&type=" + player_type + "&player_id=" + player_id,
+    success: function() {
+      //reload the page for now
+      window.location = window.location;
+    }
+  })  
+  
+  
+}

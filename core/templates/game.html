@@ -4,7 +4,10 @@
 
 {% block content %}
 
-
+<script type="text/javascript">
+{# TODO: put in roster id #};
+var roster_id = 1{# roster.id #};
+</script>
 
 
 <!-- Example row of columns -->
@@ -173,15 +176,15 @@
   </div>
   <div class="modal-body">
     Search
-    <div class="player-finder" data-button-label="Add" data-url="/players/choose">
-    <input type="text" class="player-search">
+    <div class="search-finder" data-button-label="Add" data-url="/players/choose">
+    <input type="text" class="search-box">
     
-    <ul class="player-results">
+    <ul class="search-results">
     </ul>
     
     <hr>  
-    <a class="btn-small btn player-prev" href="#">&laquo; Prev</a>
-    <a class="btn-small btn pull-right player-next" href="#">Next &raquo;</a>    
+    <a class="btn-small btn search-prev" href="#">&laquo; Prev</a>
+    <a class="btn-small btn pull-right search-next" href="#">Next &raquo;</a>    
     </div>
   </div>
   <div class="modal-footer">

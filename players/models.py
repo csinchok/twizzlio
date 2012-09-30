@@ -24,10 +24,12 @@ class Player(models.Model):
     
     def score_average(self, start_date, end_date, Service):
         datum = Service.objects.filter(player=self, date__gte=start_date, date__lte=end_date)
-        total = 0
-        for data in datum:
-            total += data.compute_score()
-        return total / datum.count()
+        if datum:
+            total = 0
+            for data in datum:
+                total += data.compute_score()
+            return total / datum.count()
+        return total
     
     def score(self, start_date, end_date, Service):
         try:

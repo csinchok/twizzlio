@@ -5,7 +5,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+from players.models import Player
+
 
 @login_required
 def profile(request):

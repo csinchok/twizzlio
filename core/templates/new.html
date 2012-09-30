@@ -5,28 +5,22 @@
 {% block content %}
 
 
-
-
 <!-- Example row of columns -->
 <div class="row">
   <h1>Start a new game</h1>
   
   <div class="span6">
 
+    <div class="search-finder" data-button-label="Start game" data-url="/users/choose" data-action="start_game">
     Search for a friend<br> 
-    <input type="text" id="player-name">
+    <input type="text" class="search-box">
     
-    <ul id="player-results" class="player-list">
-      <li>
-        <img src="https://twimg0-a.akamaihd.net/profile_images/2646120075/6f47612a4041e851a02f1e2c06d607fc_bigger.jpeg">
-            Tide
-            <button class="btn btn-small btn-success pull-right">Start a game</button>
-            
-      </li>
+    <ul class="search-results">
+
     </ul>
     <hr>  
-    <a class="btn-small btn" href="#"><span class="icon-chevron-left"></span> Prev</a>
-    <a class="btn-small btn pull-right" href="#">Next <span class="icon-chevron-right"></span></a>    
+    <a class="btn-small btn" href="#"><span class="icon-chevron-left search-next"></span> Prev</a>
+    <a class="btn-small btn pull-right" href="#">Next <span class="icon-chevron-right search-prev"></span></a>    
 
   </div>
 </div>

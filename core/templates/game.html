@@ -4,7 +4,10 @@
 
 {% block content %}
 
-
+<script type="text/javascript">
+{# TODO: put in roster id #};
+var roster_id = 1{# roster.id #};
+</script>
 
 
 <!-- Example row of columns -->
@@ -74,7 +77,7 @@
     </table>
     
 
-    <table class="table table-striped slot-group celeb-results" data-type="celeb">
+    <table class="table table-striped slot-group celeb-results" data-type="celebs">
       <thead>
         <tr>
           <th></th>
@@ -104,7 +107,7 @@
     </table>
 
 
-    <table class="table table-striped slot-group brand-results" data-type="brand">
+    <table class="table table-striped slot-group brand-results" data-type="brands">
       <thead>
         <tr>
           <th></th>
@@ -173,35 +176,16 @@
   </div>
   <div class="modal-body">
     Search
-    <input type="text" id="player-name">
+    <div class="search-finder" data-button-label="Add" data-url="/players/choose">
+    <input type="text" class="search-box">
     
-    <ul id="player-results">
-      <li><img src="https://twimg0-a.akamaihd.net/profile_images/2646120075/6f47612a4041e851a02f1e2c06d607fc_bigger.jpeg">
-            Tide
-            <button class="btn btn-small btn-success pull-right">Add</button>
-            
-      </li>
-      <li><img src="https://twimg0-a.akamaihd.net/profile_images/2646120075/6f47612a4041e851a02f1e2c06d607fc_bigger.jpeg">
-            Tide
-            <button class="btn btn-small btn-success pull-right">Add</button>
-      </li>
-      <li><img src="https://twimg0-a.akamaihd.net/profile_images/2646120075/6f47612a4041e851a02f1e2c06d607fc_bigger.jpeg">
-            Tide
-                        <button class="btn btn-small btn-success pull-right">Add</button>
-      </li>
-      <li><img src="https://twimg0-a.akamaihd.net/profile_images/2646120075/6f47612a4041e851a02f1e2c06d607fc_bigger.jpeg">
-            Tide
-                        <button class="btn btn-small btn-success pull-right">Add</button>
-      </li>
-      <li><img src="https://twimg0-a.akamaihd.net/profile_images/2646120075/6f47612a4041e851a02f1e2c06d607fc_bigger.jpeg">
-            Tide
-                        <button class="btn btn-small btn-success pull-right">Add</button>
-      </li>
+    <ul class="search-results">
     </ul>
-    <hr>  
-    <a class="btn-small btn" href="#">&laquo; Prev</a>
-    <a class="btn-small btn pull-right" href="#">Next &raquo;</a>    
     
+    <hr>  
+    <a class="btn-small btn search-prev" href="#">&laquo; Prev</a>
+    <a class="btn-small btn pull-right search-next" href="#">Next &raquo;</a>    
+    </div>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

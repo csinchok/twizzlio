@@ -21,7 +21,7 @@ def user_search(request):
     
     return json_response({
         "page": page,
-        "data": [{"id": user.id, "name": user.name } for user in User.objects.filter(singly__isnull=False, username__contains=search)]
+        "data": [{"id": user.id, "username": user.username } for user in User.objects.filter(singly__isnull=False, username__contains=search)]
     })
     
     

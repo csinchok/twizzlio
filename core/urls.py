@@ -9,10 +9,13 @@ urlpatterns = patterns('twizzlio.core.views',
     url(r'^matchups$', TemplateView.as_view(template_name="matchups.html"), name="matchups"), 
 
     #head to head view
-    url(r'^game$', TemplateView.as_view(template_name="game.html"), name="game"),
+    url(r'^game/(?P<game_id>\d)$', 'game'),
 
 
     url(r'^about$', TemplateView.as_view(template_name="about.html"), name="about"),
 
     url(r'^welcome$', TemplateView.as_view(template_name="welcome.html"), name="welcome"),
+    
+    url(r'^user/search/$', 'user_search'),
+    url(r'^create_game/$', 'create_game')
 )

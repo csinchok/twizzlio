@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.conf.urls.defaults import patterns, include, url
 
-urlpatterns = patterns('players.views',
+from players.views import PlayerList
+
+urlpatterns = patterns('',
     # Examples:
-    url(r'^choose/$', 'choose'),
+    url(r'^choose/$', PlayerList.as_view()),
 )

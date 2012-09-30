@@ -15,4 +15,7 @@ urlpatterns = patterns('twizzlio.core.views',
     url(r'^about$', TemplateView.as_view(template_name="about.html"), name="about"),
 
     url(r'^welcome$', TemplateView.as_view(template_name="welcome.html"), name="welcome"),
+    url(r'^profile$', TemplateView.as_view(template_name="profile.html"), name="profile"),
+
+
 )

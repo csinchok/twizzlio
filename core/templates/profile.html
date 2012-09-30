@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Twizzlio{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+  <div class="span4">
+    <h1>{{ user.get_full_name }}</h1>
+    
+    <ul id="services">
+      <li>Twitter  <button class="btn btn-small">Connect</button></li>
+    </ul>
+  </div>
+
+  <div class="span8">
+    <h2>Play</h2>
+  </div>
+</div>
+
+{% endblock %}

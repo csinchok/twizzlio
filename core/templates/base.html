@@ -19,7 +19,7 @@
 
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet">
-
+    <link href="{{ STATIC_URL }}css/font-awesome.css" rel="stylesheet">
 	{% endcompress %}
 
 	{% compress js %} 
@@ -39,12 +39,13 @@
 	          <a class="active brand logo" href="/">Twizzlio</a>
 	          <div class="nav-collapse collapse">
 	            <ul class="nav">
-				  {% if user.is_authenticated %}
-					
+				        {% if user.is_authenticated %}
 	              <li><a href="/new">New Game</a></li>
 	              <li><a href="/matchups">Matchups</a></li>
 	              {% endif %}
-				  <li><a href="/about">About</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/investors">Investors</a></li>
+                <li><a href="/corporate">Corporate</a></li>
 	            </ul>
 	            <div class="pull-right">
 				    {% if user.is_authenticated %}

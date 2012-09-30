@@ -3,8 +3,16 @@ body {
   padding-bottom: 40px;
 }
 
+.hero-unit h1,
+h1.logo,
 .logo {
 	font-family: 'bello-pro';
+  color: #00809b;
+}
+
+p.hero-unit {
+  font-size: 24px;
+  line-height:32px;;
 }
 
 .typekit-badge {
@@ -82,4 +90,8 @@ table.slot-group tbody td {
 
 .modal {
 
+}
+
+.btn>span {
+line-height:15px
 }

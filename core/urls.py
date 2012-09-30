@@ -10,10 +10,15 @@ urlpatterns = patterns('core.views',
     #listing of matchups
     url(r'^matchups$', TemplateView.as_view(template_name="matchups.html"), name="matchups"), 
 
-    url(r'^game$', TemplateView.as_view(template_name="game.html"), name="game"),
+    #head to head view
+    url(r'^game/(?P<game_id>\d)$', 'game'),
+
     url(r'^about$', TemplateView.as_view(template_name="about.html"), name="about"),
     url(r'^welcome$', TemplateView.as_view(template_name="welcome.html"), name="welcome"),
     
+    url(r'^user/search/$', 'user_search'),
+    url(r'^create_game/$', 'create_game')
+
     url(r'^corporate$', TemplateView.as_view(template_name="corporate.html"), name="corporate"),
     url(r'^investors$', TemplateView.as_view(template_name="investors.html"), name="investors"),
     url(r'^brands$', TemplateView.as_view(template_name="brands.html"), name="brands"),

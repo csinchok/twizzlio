@@ -1,8 +1,8 @@
-import simplejson
+import json
 from django.http import HttpResponse
 
 def json_response(json):
-    json = simplejson.dumps(json)
-    response = HttpResponse(json)
+    js = json.dumps(js)
+    response = HttpResponse(js)
     response['Content-Type'] = 'application/json'
     return response

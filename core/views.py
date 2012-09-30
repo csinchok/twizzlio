@@ -15,13 +15,13 @@ from utils import json_response
 
 
 @login_required
-def user_search(request):
+def user_choose(request):
     search = request.GET.get('search', '')
     page = int(request.GET.get('page', 0))
     
     return json_response({
         "page": page,
-        "data": [{"id": user.id, "name": user.name } for user in User.objects.filter(singly__isnull=False, username__contains=search)]
+        "data": [{"id": user.id, "username": user.username } for user in User.objects.filter(singly__isnull=False, username__contains=search)]
     })
     
     
@@ -47,18 +47,17 @@ def game(request, game_id):
     try:
         game = Game.objects.get(game_id)
     except:
-        return render_to_response("core/templates/500.html")
+        return render_to_response("500.html")
         
     rosters = Roster.objects.filter(game=game)
     
     user_roster = rosters.filter(user=request.user)
     
-    return render_to_response("core/templates/game.html", 
+    return render_to_response("game.html", 
         {"game": game,
          "user_roster": user_roster, 
          "opponent_roster": opponent_roster
-        })
-# Create your views here.
+        }, context_instance=RequestContext(request))
 
 @login_required
 def profile(request):

@@ -38,12 +38,15 @@ def update_player(player_id):
             fb_data.posts = len(facebook_response.json.get('data', []))
             fb_data.save()
         
-        if player.photo is None:
-            photo_request = requests.get('%s/picture' % fb_proxy, params={'access_token': settings.SINGLY_ACCESS_TOKEN, 'type':'large'})
-            if photo_request.status_code == 200:
-                image_path = os.path.join(settings.MEDIA_ROOT, 'players', '%s.jpeg' % player.id)
-                photo_file = open(image_path, 'wb')
-                photo_file.write(photo_request.content)
-                player.photo = 'players/' +  os.path.basename(image_path)
-                player.save()
+        # if player.photo is None:
+        photo_request = requests.get('%s/picture' % fb_proxy, params={'access_token': settings.SINGLY_ACCESS_TOKEN, 'type':'large'})
+        if photo_request.status_code == 200:
+            image_path = os.path.join(settings.MEDIA_ROOT, 'players', '%s.jpeg' % player.id)
+            photo_file = open(image_path, 'wb')
+            photo_file.write(photo_request.content)
+            player.photo = 'players/' +  os.path.basename(image_path)
+            print(player.photo)
+            player.save()
+        else:
+            print(photo_request.text)
         

@@ -21,6 +21,7 @@ include
 develop-eggs
 src
 doc
+share
 
 # Installer logs
 pip-log.txt

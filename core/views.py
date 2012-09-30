@@ -57,7 +57,6 @@ def game(request, game_id):
          "user_roster": user_roster, 
          "opponent_roster": opponent_roster
         })
-# Create your views here.
 
 @login_required
 def profile(request):

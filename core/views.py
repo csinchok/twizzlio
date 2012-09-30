@@ -15,7 +15,7 @@ from utils import json_response
 
 
 @login_required
-def user_search(request):
+def user_choose(request):
     search = request.GET.get('search', '')
     page = int(request.GET.get('page', 0))
     

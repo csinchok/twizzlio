@@ -16,7 +16,7 @@ urlpatterns = patterns('core.views',
     url(r'^about$', TemplateView.as_view(template_name="about.html"), name="about"),
     url(r'^welcome$', TemplateView.as_view(template_name="welcome.html"), name="welcome"),
     
-    url(r'^user/search/$', 'user_search'),
+    url(r'^users/choose/$', 'user_choose'),
     url(r'^create_game/$', 'create_game'),
 
     url(r'^corporate$', TemplateView.as_view(template_name="corporate.html"), name="corporate"),

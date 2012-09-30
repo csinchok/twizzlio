@@ -48,6 +48,12 @@ table.slot-group tbody td {
   height:32px;
   width:32px;
 }
+.player-list li { 
+  margin-bottom: 6px 0;
+  padding-bottom: 6px;
+  background-color: white;
+  border-bottom: 1px solid #DDD;
+}
 
 #player-results li {
   list-style:none;

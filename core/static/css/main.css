@@ -104,3 +104,12 @@ line-height:15px
   list-style:none;
   line-height:32px;
 }
+
+ul.search-results {
+  list-style-type: none;
+}
+
+ul.search-results li {
+    list-style:none;
+    line-height:50px;
+}

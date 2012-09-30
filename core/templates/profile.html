@@ -12,13 +12,15 @@
     
     <ul id="services">
 		{% for service in services %}
-        <li>{{ service.name }}  <a href="{% singly_login_url service.slug %}" class="btn btn-small">Connect</a></li>
+        <li>{{ service.name }}  
+			{% if service.slug in user.singly.services %}
+			<a href="#" class="btn btn-small btn-danger">Logout</a>
+			{% else %}
+			<a href="{% singly_login_url service.slug %}" class="btn btn-small">Connect</a>			
+			{% endif %}
+		</li>
 		{% endfor %}
     </ul>
-  </div>
-
-  <div class="span8">
-    <h2>Play</h2>
   </div>
 </div>
 

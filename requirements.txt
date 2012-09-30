@@ -10,7 +10,6 @@ celery==3.0.11
 django-appconf==0.5
 django-celery==3.0.10
 django-compressor==1.2
--e git+https://github.com/csinchok/django-singly.git@8ce2f1bc74787fd364e59f7beaf883fad74c98bc#egg=django_singly-dev
 gunicorn==0.14.6
 kombu==2.4.7
 meld3==0.6.9
@@ -26,3 +25,4 @@ ssh==1.7.14
 superlance==0.7
 supervisor==3.0a10
 wsgiref==0.1.2
+-e git+https://github.com/csinchok/django-singly.git@bb19a984f5254cb61661daf68b90e1efeeed6aa7#egg=singly

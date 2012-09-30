@@ -18,7 +18,6 @@ from utils import json_response
 
 class PlayerList(ListView):
     model = Player
-    # context_object = "players"
     
     def get_queryset(self):
         request = self.request
@@ -59,7 +58,6 @@ class PlayerList(ListView):
         Returns a JSON response, transforming 'context' to make the payload.
         """
         
-        
         pages = { "page": context['object_list'].number,
                   "data": [{
                      "id": player.id, 
@@ -71,25 +69,6 @@ class PlayerList(ListView):
             json.dumps(pages),
             **response_kwargs
         )
-
-@login_required
-def choose(request):
-    user = request.user
-    
-    player_type = request.GET.get('type', None)
-    search = request.GET.get('search', '')
-    page = int(request.GET.get('page', 0))
-    
-    if page < 0:
-        page = 0
-    
-
-    
-    
-    return json_response({
-        "page": page,
-        "data": [{"id": player.id, "name": player.name, "photo": player.photo.url } for player in players]
-    })
     
     
     

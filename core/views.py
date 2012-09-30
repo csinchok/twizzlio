@@ -3,6 +3,9 @@ import requests
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 
 from core.models import *
 
@@ -54,3 +57,19 @@ def game(request, game_id):
          "user_roster": user_roster, 
          "opponent_roster": opponent_roster
         })
+# Create your views here.
+
+@login_required
+def profile(request):
+    
+    services = [
+        {'name': 'Twitter', 'slug': 'twitter'},
+        {'name': 'Facebook', 'slug': 'facebook'},
+        {'name': 'Tumblr', 'slug': 'tumblr'},
+        {'name': 'Instagram', 'slug': 'instagram'},
+        {'name': 'Github', 'slug': 'github'},
+    ]
+    
+    return render_to_response('profile.html',
+                              {'services': services},
+                              context_instance=RequestContext(request))

@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from players.models import *
+from players.tasks import update_player
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -13,5 +14,4 @@ class Command(BaseCommand):
         
         for user in users:
             player = Player.objects.create(user=user,name=user.first_name)
-            player.import_facebook()
-            player.import_twitter()
+            update_player.delay(player.id)

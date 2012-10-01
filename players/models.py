@@ -17,10 +17,13 @@ class Player(models.Model):
     name = models.CharField(max_length=255)
     photo = models.ImageField(upload_to='player', null=True, blank=True)
     
-    has_twitter = models.BooleanField(default=False)
-    has_facebook = models.BooleanField(default=False)
-    
     user = models.ForeignKey(User, null=True, blank=True)
+    
+    def has_twitter(self):
+        return self.user and self.user.singly and ("twitter" in self.user.singly.services())
+        
+    def has_facebook(self):
+        return self.user and self.user.singly and ("facebook" in self.user.singly.services())
     
     def score_average(self, start_date, end_date, Service):
         datum = Service.objects.filter(player=self, date__gte=start_date, date__lte=end_date)
@@ -37,64 +40,7 @@ class Player(models.Model):
             end_service = Service.objects.get(player=self, date=end_date.date)
             return end_service.compute_score() - start_service.compute_score()
         except:
-            return 0   
-            
-            
-    def import_facebook(self, date=datetime.date.today()):
-        access_token = self.user.singly.access_token
-        
-        r = requests.get("%sme/friends?access_token=%s" % (fb_proxy, access_token))
-        
-        friends = len(r.json.get('data', []))
-            
-        if self.photo is None:
-            try:
-                url = "%sme/picture?type=large&access_token=%s" % (fb_proxy, self.facebook_name, settings.SINGLY_ACCESS_TOKEN)
-                self.photo = url
-                self.save()
-            except:
-                pass
-                        
-        fb, created = FacebookData.objects.get_or_create(player=self, date=date)
-        fb.friends = friends
-        fb.save()
-    
-    def import_twitter(self, date=datetime.date.today()):
-        access_token = self.user.singly.access_token
-        
-        r = requests.get("%sprofiles/twitter?access_token=%s" % (singly_url, access_token))
-        
-        data = r.json.get('data', None)
-        
-        if not data:
-            return
-        
-        followers = data.get('followers_count', 0)
-        statuses = data.get('statuses_count', 0)
-            
-        twitter, created = TwitterData.objects.get_or_create(player=self, date=date)
-        twitter.followers = followers
-        twitter.statuses = statuses
-        twitter.save()
-        
-    def save(self, *args, **kwargs):
-        if self.user:
-            access_token = self.user.singly.access_token
-        
-            r = requests.get("%sv0/profile?access_token=%s" % (singly_url, access_token))
-                
-            photo = r.json.get("thumbnail_url", None)
-            if photo:
-                self.photo = photo
-            
-            services = r.json.get("services", None)
-            if services:
-                if services.get("twitter", None):
-                    self.has_twitter = True
-                if services.get("facebook", None):
-                    self.has_facebook = True
-                
-        super(Player, self).save(*args, **kwargs)
+            return 0        
     
     def __unicode__(self):
         return self.name
@@ -117,6 +63,12 @@ class BrandPlayer(Player):
     
     twitter_handle = models.CharField(max_length=255)
     facebook_name = models.CharField(max_length=255)
+    
+    def has_twitter(self):
+        return self.twitter_handle
+        
+    def has_facebook(self):
+        return self.facebook_name
     
     def score(self, start_date, end_date):
         try:

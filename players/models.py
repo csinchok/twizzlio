@@ -33,15 +33,30 @@ class Player(models.Model):
                 total += data.compute_score()
             return total / datum.count()
         return total
-    
-    def score(self, start_date, end_date, Service):
-        try:
-            start_service = Service.objects.get(player=self, date=start_date.date)
-            end_service = Service.objects.get(player=self, date=end_date.date)
-            return end_service.compute_score() - start_service.compute_score()
-        except:
-            return 0        
-    
+            
+    def score(self, date):
+        date_before = date - datetime.timedelta(days=1)
+        score = {}
+        if self.has_twitter():
+            try:
+                second_day = TwitterData.objects.get(player=self, date=date)
+                first_day = TwitterData.objects.get(player=self, date=date_before)
+            except TwitterData.DoesNotExist:
+                score['twitter'] = 0
+            else:
+                score['twitter'] = second_day.compute_score() - first_day.compute_score()
+        
+        if self.has_facebook():
+            try:
+                second_day = FacebookData.objects.get(player=self, date=date)
+                first_day = FacebookData.objects.get(player=self, date=date_before)
+            except FacebookData.DoesNotExist:
+                score['facebook'] = 0
+            else:
+                score['facebook'] = second_day.compute_score() - first_day.compute_score()
+        
+        return score    
+
     def __unicode__(self):
         return self.name
                 
@@ -69,24 +84,42 @@ class BrandPlayer(Player):
         
     def has_facebook(self):
         return self.facebook_name
-    
-    def score(self, start_date, end_date):
-        try:
-            start_facebook = BrandFacebookData.objects.get(player=self, date=start_date)
-            end_facebook = BrandFacebookData.objects.get(player=self, date=end_date)
-            facebook_score = end_facebook.compute_score() - start_facebook.compute_score()
-        except:
-            facebook_score = 0
-            
-        try:
-            start_twitter = BrandTwitterData.objects.get(player=self, date=start_date)
-            end_twitter = BrandTwitterData.objects.get(player=self, date=end_date)
-            twitter_score = end_twitter.compute_score() - start_twitter.compute_score()
-        except:
-            twitter_score = 0
-            
-        return log(facebook_score + twitter_score)
-            
+        
+    def score(self, date):
+        date_before = date - datetime.timedelta(days=1)
+        score = {}
+        if self.has_twitter():
+            try:
+                second_day = BrandTwitterData.objects.get(player=self, date=date)
+                first_day = BrandTwitterData.objects.get(player=self, date=date_before)
+            except BrandTwitterData.DoesNotExist:
+                score['twitter'] = 0
+            else:
+                base_score = first_day.compute_score()
+                if base_score == 0:
+                    # if base is zero, just take absolute score
+                    score['twitter'] = second_day.compute_score()
+                else:
+                    # 10x percent change
+                    score['twitter'] = 1000 * (float(second_day.compute_score() - base_score)/base_score)
+        
+        if self.has_facebook():
+            try:
+                second_day = BrandFacebookData.objects.get(player=self, date=date)
+                first_day = BrandFacebookData.objects.get(player=self, date=date_before)
+            except BrandFacebookData.DoesNotExist:
+                score['facebook'] = 0
+            else:
+                base_score = first_day.compute_score()
+                if base_score == 0:
+                    # if base is zero, just take absolute score
+                    score['facebook'] = second_day.compute_score()
+                else:
+                    # 10x percent change
+                    score['facebook'] = 1000*(float(second_day.compute_score() - base_score)/base_score)
+        
+        return score
+        
     def str(self):
         return self.name
         

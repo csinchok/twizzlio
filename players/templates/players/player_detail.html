@@ -40,4 +40,19 @@
 	    <div id="visualization" style="width: 500px; height: 400px;"></div>
 	</div>
 </div>
+<div class="row">
+    <table>
+        <tr>
+            <th class="span1">Date</th>
+            <th class="span1">Facebook Score</th>
+            <th class="span1">Twitter Score</th>
+        </tr>
+        {% for score in scores %}
+        <tr>
+            <td>{{ score.date }}</td>
+            <td>{{ score.facebook|floatformat }}</td>
+            <td>{{ score.twitter|floatformat }}</td>
+        </tr>    
+        {% endfor %}
+</div>
 {% endblock %}

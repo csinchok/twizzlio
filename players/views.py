@@ -30,20 +30,21 @@ class PlayerDetailView(DetailView):
         start_date = datetime.datetime.now() - datetime.timedelta(weeks=2)
         scores = []
         for day in xrange(14):
-            end_date = start_date + datetime.timedelta(days=1)
             if hasattr(self.object, 'brandplayer'):
+                score = self.object.brandplayer.score(start_date)
                 scores.append({
                     'date': start_date.strftime('%m/%d'),
-                    'facebook': self.object.score(start_date, end_date, BrandFacebookData),
-                    'twitter': self.object.score(start_date, end_date, BrandTwitterData),
+                    'facebook': score.get('facebook', 0),
+                    'twitter': score.get('twitter', 0),
                 })
             else:
+                score = self.object.score(start_date)
                 scores.append({
                     'date': start_date.strftime('%m/%d'),
-                    'facebook': self.object.score(start_date, end_date, FacebookData),
-                    'twitter': self.object.score(start_date, end_date, TwitterData),
+                    'facebook': score.get('facebook', 0),
+                    'twitter': score.get('twitter', 0),
                 })
-            start_date = end_date
+            start_date = start_date + datetime.timedelta(days=1)
         context['scores'] = scores
         return context
 

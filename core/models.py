@@ -36,21 +36,3 @@ class Roster(models.Model):
         return self.celeb_1 is not None and self.brand_1 is not None and self.facebook_1 is \
             not None and self.facebook_2 is not None and self.twitter_1 is not None \
             and twitter_2 is not None
-    
-    def get_scores(self):
-        start_date = self.game.start_time.date()
-        today = datetime.date.today()
-        vals =  {
-            "celeb_1": self.celeb_1.score(start_date, today),
-            "brand_1": self.brand_1.score(start_date, today),
-            "facebook_1": self.facebook_1.score(start_date, today, FacebookData),
-            "facebook_2": self.facebook_2.score(start_date, today, FacebookData),
-            "twitter_1": self.twitter_1.score(start_date, today, TwitterData),
-            "twitter_2": self.twitter_2.score(start_date, today, TwitterData),
-        }
-        
-        vals['total'] = sum([value for key, value in vals.items()])
-        
-        return vals
-        
-    
